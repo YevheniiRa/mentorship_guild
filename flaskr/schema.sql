@@ -1,4 +1,4 @@
-# Matsenko
+
 DROP TABLE IF EXISTS user_tab; 
 DROP TABLE IF EXISTS post;
 
@@ -19,11 +19,12 @@ CREATE TABLE post (
 
 
 CREATE TABLE course (
+    author_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     start_date DATE,
-    FOREIGN KEY (author_id) REFERENCES user_tab (id),
-    description TEXT NOT NULL,
-    studends_id TEXT NOT NULL 
+    descr TEXT NOT NULL,
+     studends_id TEXT NOT NULL ,
+    FOREIGN KEY (author_id) REFERENCES user_tab (id)
+   
 );
 
--- JSON([1, 2, 3, 4])
