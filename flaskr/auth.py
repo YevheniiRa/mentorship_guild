@@ -16,7 +16,6 @@ def register():
         password = request.form['password']
         name = request.form['first_name']
         email = request.form['email']
-        age=request.form['age']
         prof_skills = request.form['skills']
         birthday = request.form['age']
         telephone_number=request.form['phone']
