@@ -23,7 +23,7 @@ CREATE TABLE course (
     name TEXT NOT NULL,
     start_date DATE,
     descr TEXT NOT NULL,
-     studends_id TEXT NOT NULL ,
+    studends_id TEXT NOT NULL ,
     FOREIGN KEY (author_id) REFERENCES user_tab (id)
    
 );
