@@ -12,8 +12,15 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form['nick']
         password = request.form['password']
+        name = request.form['first_name']
+        email = request.form['email']
+        age=request.form['age']
+        prof_skills = request.form['skills']
+        birthday = request.form['age']
+        telephone_number=request.form['phone']
+        
         db = get_db()
         error = None
 
@@ -22,22 +29,21 @@ def register():
         elif not password:
             error = 'Password is required.'
         elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
+            'SELECT id FROM user_tab WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
+                'INSERT INTO user_tab (username, password,name,email,telephone_number,   prof_skills   ,birthday) VALUES (?, ?,?,?,?,?,?)',
+                (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return redirect(url_for('auth.login'))
+            return "Hello"
 
         flash(error)
 
-    return render_template('auth/register.html')
-
+    return "Hello"
 
 
 
@@ -75,7 +81,7 @@ def login():
 
     return render_template('auth/login.html')
 
-    
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Регістрація волонтера</title>
+</head>
+<body>
+    <style>
+        form{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <form method="post" action="auth/register" >
+            <div class="outline">
+            <h2>Зареєструйтеся</h2>
+            <p>Ім'я: 	&#160; <input id= "first_name"name="first_name" value=""></p>
+            <p>Пароль: <input name="password" id="password" type="password"></p><p>
+            <p>Електрона адреса: <input name="email" id="email" type="email"></p><p>
+            <p>Номер телефону: 	&#160; <input name="phone" id="telephone" type="tel"  ></p>
+            <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
+            <p>Рік народження: 	&#160; <input name="age" type="date" id="age"></p>
+            <p>Професійні навички: 	&#160; <input name="skills" id="skills" ></p>
+            <button name = "btn_login" id="btn_login" value="Login" style="width:150px;height:60px"><b>Зареєструватися</b></button>
+           </div>
+    </form>
+    <script>
+     
+     
+        $("#btn_login").click(function(){
+            if($("#first_name").val()=="" ||$("#last_name").val()==""||$("#password").val()==""||$("#email").val()==""||$("#telephone").val()==""||$("#nick").val()==""||$("#age").val()==""||$("#skills").val()==""){
+            alert("Заповніть всі поля!");
+            $("form").attr("action","");
+            }
+            else{
+                alert("Ви зареєструвалися!");
+            }
+        });
+
+    </script>
+</body>
+</html>

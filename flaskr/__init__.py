@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from . import auth
 from . import db
-
+from flask import render_template
 def create_app(test_config=None):
 
     app = Flask(__name__, instance_relative_config=True)
@@ -24,6 +24,9 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+    @app.route('/reg')
+    def hello():
+        return render_template('reg_vol.html')
 
 
     return app
