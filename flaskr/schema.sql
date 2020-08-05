@@ -6,7 +6,7 @@ CREATE TABLE user_tab (
   id  INTEGER  PRIMARY KEY,  
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  name TEXT UNIQUE NOT NULL,
+  name TEXT  NOT NULL,
   email TEXT UNIQUE NOT NULL,
   telephone_number TEXT UNIQUE NOT NULL ,
   birthday TEXT NOT NULL,
