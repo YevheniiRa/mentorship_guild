@@ -24,9 +24,12 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    @app.route('/reg')
-    def hello():
+    @app.route('/register')
+    def register():
         return render_template('reg_vol.html')
+    @app.route('/login')
+    def login():
+        return render_template('log_vol.html')    
 
 
     return app

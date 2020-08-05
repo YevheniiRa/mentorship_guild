@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Логін</title>
+</head>
+<body>
+    <style>
+        form{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <form method="post" action="auth/login" >
+            <div class="outline">
+            <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
+            <p>Пароль: <input name="password" id="password" type="password"></p><p>
+
+            <button name = "btn_login" id="btn_login" value="Login" style="width:150px;height:60px"><b>Логін</b></button>
+           </div>
+    </form>
+    <script>
+
+
+        $("#btn_login").click(function(){
+            if($("#password").val()==""||$("#nick").val()==""){
+            alert("Заповніть всі поля!");
+            $("form").attr("action","");
+            }
+
+        });
+
+    </script>
+</body>
+</html>

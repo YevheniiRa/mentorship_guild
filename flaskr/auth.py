@@ -1,4 +1,4 @@
-# CleverCat07
+# CleverCat07 &Matsenko
 import functools
 
 from flask import (
@@ -38,11 +38,11 @@ def register():
                 (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return "Hello"
+            return "Все ок"
 
         flash(error)
 
-    return "Hello"
+    return "Все ок"
 
 
 
@@ -58,27 +58,30 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form['nick']
         password = request.form['password']
         db = get_db()
         error = None
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            'SELECT * FROM user_tab WHERE username = ?', (username,)
         ).fetchone()
 
         if user is None:
             error = 'Incorrect username.'
+            return "Incorrect password or username. "
+            
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
+            return "Incorrect password or username. "
 
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return "Все ок"
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return render_template('log_vol.html')
 
 
 @bp.before_app_request
@@ -89,7 +92,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM user_tab WHERE id = ?', (user_id,)
         ).fetchone()    
 ##############################################################################
 ##############################################################################
