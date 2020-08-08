@@ -1,0 +1,121 @@
+body{
+  padding:0;
+  margin:0;
+}
+
+img{
+  background-repeat: no-repeat;
+  width:100%;
+  height:100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+
+h1 {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+.block{
+  background-repeat: no-repeat;
+  width:100%;
+  height: 600px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../4.jpg);
+}
+
+.block1{
+  background-repeat: no-repeat;
+  width:100%;
+  height: 500px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../bleach_2.png);
+}
+
+.block2{
+  background-repeat: no-repeat;
+  width:100%;
+  height: 250px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../shaman_king.png);
+}
+
+
+.block2{
+  background-repeat: no-repeat;
+  width:100%;
+  height: 100px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../shaman_king.png);
+}
+
+
+.sponsered {
+  font-family: 'Press Start 2P', cursive;
+}
+
+h2 {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+#line{
+  background-color: black;
+  width: 100%;
+  height: 50px;  
+}
+
+#button{
+	opacity: 0;
+	visibility: hidden;
+	transition: .5s;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	background-color: #000;
+	border-radius: 5px;
+	padding: 10px 20px;
+	outline: none;
+	transition: .3s;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+#button:hover{
+	background-color: gray;
+	transition: .3s;
+	color: #000;
+}
+a:hover{
+  text-shadow: 2px 2px red;
+}
+a {
+  color: #000 !important;
+  text-decoration: none
+}
+.test{
+ transform: scale(0.3);
+
+ background-color: #fff;
+ color: #333;
+ padding: 75px;
+ margin: 15px
+ border:10px solid #2F3841;
+ border-radius: 100px;
+ opacity: 0.9;
+ height: 300px;
+ display: block;
+ text-align: center;
+ font-size: 50px;
+ font-weight: 900;
+
+}

@@ -104,3 +104,34 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+@bp.route('/create_course', methods=('GET', 'POST'))
+def course():
+    if request.method == 'POST':
+        course_name = request.form['name']
+        descr = request.form['descr']
+        db = get_db()
+        error = None
+
+        if not name:
+            error = 'Name is required.'
+        elif not descr:
+            error = 'Please enter description'
+        elif db.execute(
+            'SELECT * FROM course WHERE name = ?', (name,)
+        ).fetchone() is not None:
+            error = 'Name of course {} is already registered.'.format(name)
+
+        if error is None:
+            db.execute(
+                'INSERT INTO user (name, password) VALUES (?, ?)',
+                (name, descr)
+            )
+            db.commit()
+            return redirect(url_for('auth.create_course'))
+
+        flash(error)
+
+    return render_template('create_course.html')
+@bp.route('/course_list', methods=('GET', 'POST'))
+def list():
+	return render_template(url_for('auth.course_list'))
