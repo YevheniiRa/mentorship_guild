@@ -22,13 +22,13 @@
             <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
             <p>Рік народження: 	&#160; <input name="age" type="date" id="age"></p>
             <p>Професійні навички: 	&#160; <input name="skills" id="skills" ></p>
-            <button name = "btn_login" id="btn_login" value="Login" style="width:150px;height:60px"><b>Зареєструватися</b></button>
+            <button name = "btn_register" id="btn_register" value="Register" style="width:150px;height:60px"><b>Зареєструватися</b></button>
            </div>
     </form>
     <script>
 
 
-        $("#btn_login").click(function(){
+        $("#btn_register").click(function(){
             if($("#first_name").val()=="" ||$("#last_name").val()==""||$("#password").val()==""||$("#email").val()==""||$("#telephone").val()==""||$("#nick").val()==""||$("#age").val()==""||$("#skills").val()==""){
             alert("Заповніть всі поля!");
             $("form").attr("action","");

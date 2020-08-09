@@ -19,18 +19,13 @@ def register():
         prof_skills = request.form['skills']
         birthday = request.form['age']
         telephone_number=request.form['phone']
-        
         db = get_db()
         error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif db.execute(
+        if db.execute(
             'SELECT id FROM user_tab WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
+            return "Користувач з таким ніком вже зареєстрованний"
 
         if error is None:
             db.execute(
@@ -38,7 +33,7 @@ def register():
                 (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return "Все ок"
+            return "Ви зареєструвалися!"
 
         flash(error)
 
@@ -68,11 +63,11 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-            return "Incorrect password or username. "
+            return "Неправильний пароль або нік. "
             
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
-            return "Incorrect password or username. "
+            return "Неправильний пароль або нік. "
 
         if error is None:
             session.clear()
