@@ -39,8 +39,13 @@
         <ul>
             <li>Назва курсу: {{courses['name']}}</li>
             <li>Опис курсу: {{courses['descr']}}</li>
+         
             <li>Початок курсу: {{courses['start_date']}}</li>
-            <li>Ментор: {{courses['author_id']}}</li>
+            {% for mentor in mentor  %}
+            {% if mentor['id']==courses['author_id'] %}
+            <li>Ментор: {{mentor['username']}}</li>
+            {% endif %}
+            {% endfor %}
             <li>Студенти: {{courses['studends_id']}}</li>
             <form action="">
                 <button>Приєднатися до курсу</button>

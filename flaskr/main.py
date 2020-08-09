@@ -52,8 +52,9 @@ def course_list():
         ' FROM course '
         
     ).fetchall()
-    
-    return render_template('course_list.html',courses=courses)  
+    mentor = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
+
+    return render_template('course_list.html',courses=courses,mentor=mentor)  
 
     
    
