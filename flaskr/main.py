@@ -35,7 +35,7 @@ def courses_create():
             session['user_id'] = user['id']
             db.execute(
                 'INSERT INTO course (start_date, name,author_id,descr   ) VALUES (?,?,?,?)',
-                (course_date, course_name,user['íd'],about_course )
+                (course_date, course_name,user['id'],about_course )
             )
             db.commit()
             return "Ви створили курс!"    
