@@ -2,12 +2,14 @@ import os
 from flask import Flask
 from . import auth
 from . import db
+from . import main
 from flask import render_template
 def create_app(test_config=None):
 
     app = Flask(__name__, instance_relative_config=True)
     db.init_app(app)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(main.bp)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
