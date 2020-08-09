@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Course list</title>
-  <link rel="stylesheet" href="../static/css/XD.css">
-  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Створіть курс </title>
 </head>
+
 <body>
-{% extends 'base.html' %}
-{% for course in course %}
-<test>{{course.name}}<br>{{course.descr}}</test>
-{%endfor%}
+    <style>
+        .courses {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .courses li {
+            padding-top: 25px;
+        }
+
+        .courses ul {
+            list-style: none;
+            padding-top: 25px;
+            width: 100%;
+            height: 100%;
 
 
+        }
+    </style>
+    {% for courses in courses %}
+    <div class="courses">
+        <ul>
+            <li>Назва курсу: {{courses['name']}}</li>
+            <li>Опис курсу: {{courses['descr']}}</li>
+            <li>Початок курсу: {{courses['start_date']}}</li>
+            <li>Ментор: {{courses['author_id']}}</li>
+            <li>Студенти: {{courses['studends_id']}}</li>
+            <form action="">
+                <button>Приєднатися до курсу</button>
+            </form>
+        </ul>
+    </div>
 
-<script type="text/javascript" src="../static/js/script.js"></script>
+    {% endfor %}
+    <script>
+    </script>
 </body>
+
 </html>

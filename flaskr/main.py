@@ -44,6 +44,16 @@ def courses_create():
         flash(error)
 
     return "Все ок"
+@bp.route('/course/list')
+def course_list():
+    db = get_db()
+    courses = db.execute(
+        'SELECT name, start_date, descr, studends_id, author_id'
+        ' FROM course '
+        
+    ).fetchall()
+    
+    return render_template('course_list.html',courses=courses)  
 
     
    
