@@ -1,43 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Регістрація </title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Реєстрація </title>
 </head>
+
 <body>
     <style>
-        form{
+        form {
             display: flex;
             justify-content: center;
+            padding-bottom: 30px;
+        }
+
+        form p {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+        }
+
+        form button {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+        }
+
+        header p {
+            font-size: 40px;
+            color: white;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        footer {
+            display: flex;
+            justify-content: flex-end;
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            width: 100%;
+            height: 100%;
+
+        }
+
+        footer p {
+            color: white;
         }
     </style>
-    <form method="post" action="auth/register" >
-            <div class="outline">
-            <h2>Зареєструйтеся</h2>
-            <p>Ім'я: 	&#160; <input id= "first_name"name="first_name" value=""></p>
-            <p>Пароль: <input name="password" id="password" type="password"></p><p>
-            <p>Електрона адреса: <input name="email" id="email" type="email"></p><p>
-            <p>Номер телефону: 	&#160; <input name="phone" id="telephone" type="tel"  ></p>
-            <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
-            <p>Рік народження: 	&#160; <input name="age" type="date" id="age"></p>
-            <p>Професійні навички: 	&#160; <input name="skills" id="skills" ></p>
-            <button name = "btn_register" id="btn_register" value="Register" style="width:150px;height:60px"><b>Зареєструватися</b></button>
-           </div>
+    <header>
+        <p>Реєстрація</p>
+    </header>
+    <form method="post" action="auth/register">
+        <div class="outline">
+            <p>Ім'я: &#160; <input id="first_name" name="first_name" value=""></p>
+            <p>Пароль: <input name="password" id="password" type="password"></p>
+            <p>
+            <p>Електрона адреса: <input name="email" id="email" type="email"></p>
+            <p>
+            <p>Номер телефону: &#160; <input name="phone" id="telephone" type="tel"></p>
+            <p>Нік: &#160; <input name="nick" id="nick"></p>
+            <p>Рік народження: &#160; <input name="age" type="date" id="age"></p>
+            <p>Професійні навички: &#160; <input name="skills" id="skills"></p>
+            <button name="btn_register" id="btn_register" value="Register"
+                style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Зареєструватися</b></button>
+        </div>
     </form>
+    <footer>
+        <p>Створенно командою "Python Summer 2020"</p>
+    </footer>
     <script>
 
 
-        $("#btn_register").click(function(){
-            if($("#first_name").val()=="" ||$("#last_name").val()==""||$("#password").val()==""||$("#email").val()==""||$("#telephone").val()==""||$("#nick").val()==""||$("#age").val()==""||$("#skills").val()==""){
-            alert("Заповніть всі поля!");
-            $("form").attr("action","");
+        $("#btn_register").click(function () {
+            if ($("#first_name").val() == "" || $("#last_name").val() == "" || $("#password").val() == "" || $("#email").val() == "" || $("#telephone").val() == "" || $("#nick").val() == "" || $("#age").val() == "" || $("#skills").val() == "") {
+                alert("Заповніть всі поля!");
+                $("form").attr("action", "");
             }
-            else{
+            else {
                 alert("Ви зареєструвалися!");
             }
+        });
+        var btnHeight = $("#btn_register").height();
+        $("#btn_register").mouseenter(function(){
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function(){
+            $(this).animate({
+                height: btnHeight
+            });
         });
 
     </script>
 </body>
+
 </html>

@@ -20,24 +20,26 @@ def register():
         birthday = request.form['age']
         telephone_number=request.form['phone']
         db = get_db()
+
+        
         error = None
         if db.execute(
             'SELECT id FROM user_tab WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
             return "Користувач з таким ніком вже зареєстрованний"
-
+        
         if error is None:
             db.execute(
                 'INSERT INTO user_tab (username, password,name,email,telephone_number,   prof_skills   ,birthday) VALUES (?, ?,?,?,?,?,?)',
                 (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return "Ви зареєструвалися!"
+            return render_template('log_vol.html')
 
         flash(error)
 
-    return "Все ок"
+    return render_template('reg_vol.html')
 
 
 

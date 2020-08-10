@@ -48,13 +48,14 @@ def courses_create():
 def course_list():
     db = get_db()
     courses = db.execute(
-        'SELECT name, start_date, descr, studends_id, author_id'
+        'SELECT name, start_date, descr, students_id, author_id'
         ' FROM course '
         
     ).fetchall()
     mentor = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
+    student = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
 
-    return render_template('course_list.html',courses=courses,mentor=mentor)  
+    return render_template('course_list.html',courses=courses,mentor=mentor,student=student)  
 
     
    
