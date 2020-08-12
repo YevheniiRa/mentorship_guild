@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('auth', __name__, url_prefix='/')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -35,11 +35,15 @@ def register():
                 (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return render_template('log_vol.html')
+            return render_template('log.html')
 
         flash(error)
+    if request.method == 'GET':
+        return render_template('reg.html')
 
-    return render_template('reg_vol.html')
+
+    
+    
 
 
 
@@ -77,8 +81,11 @@ def login():
             return "Все ок"
 
         flash(error)
+    if request.method == 'GET':
+        return render_template('log.html')
 
-    return render_template('log_vol.html')
+
+    
 
 
 @bp.before_app_request
@@ -101,34 +108,3 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('index'))
-@bp.route('/create_course', methods=('GET', 'POST'))
-def course():
-    if request.method == 'POST':
-        course_name = request.form['name']
-        descr = request.form['descr']
-        db = get_db()
-        error = None
-
-        if not name:
-            error = 'Name is required.'
-        elif not descr:
-            error = 'Please enter description'
-        elif db.execute(
-            'SELECT * FROM course WHERE name = ?', (name,)
-        ).fetchone() is not None:
-            error = 'Name of course {} is already registered.'.format(name)
-
-        if error is None:
-            db.execute(
-                'INSERT INTO user (name, password) VALUES (?, ?)',
-                (name, descr)
-            )
-            db.commit()
-            return redirect(url_for('auth.create_course'))
-
-        flash(error)
-
-    return render_template('create_course.html')
-@bp.route('/course_list', methods=('GET', 'POST'))
-def list():
-	return render_template(url_for('auth.course_list'))

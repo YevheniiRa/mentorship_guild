@@ -26,15 +26,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    @app.route('/register')
-    def register():
-        return render_template('reg_vol.html')
-    @app.route('/login')
-    def login():
-        return render_template('log_vol.html')  
-    @app.route('/course')
-    def course_create():
-        return render_template('course_create.html')      
+
+    @app.route('/')
+    def home():
+        return render_template('home.html')    
 
 
     return app

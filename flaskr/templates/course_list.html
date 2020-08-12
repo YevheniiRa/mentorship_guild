@@ -74,11 +74,21 @@
         .courses ul{
             border-left: 3px solid black;
             
+            
+        }
+        .background{
+            background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+            width: 100%;
+            height:20px;
         }
     </style>
     <header>
         <p>Список курсів</p>
     </header>
+    <div class="background">
+
+    </div>
+
     {% for courses in courses %}
     <div class="courses">
         <ul>
@@ -104,6 +114,9 @@
         </ul>
     </div>
     {% endfor %}
+    <div class="background">
+
+    </div>
     <footer>
         <p>Створенно командою "Python Summer 2020"</p>
     </footer>

@@ -5,25 +5,12 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Вхід</title>
+    <title>Головна сторінка</title>
 </head>
 
 <body>
     <style>
-        form {
-            display: flex;
-            justify-content: center;
-        }
 
-        form p {
-            background-image: linear-gradient(to right, #434343 0%, black 100%);
-            color: white;
-        }
-
-        form button {
-            background-image: linear-gradient(to right, #434343 0%, black 100%);
-            color: white;
-        }
 
         header {
             display: flex;
@@ -33,11 +20,19 @@
             background-image: linear-gradient(to right, #434343 0%, black 100%);
         }
 
-        header p {
-            font-size: 40px;
+        header ul li {
+            font-size: 30px;
             color: white;
         }
-
+        header ul{
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            
+        }
+        header ul li {
+            padding-left: 25px; 
+        }
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -50,41 +45,41 @@
             background-image: linear-gradient(to right, #434343 0%, black 100%);
             width: 100%;
             height: 100%;
+            
 
         }
 
-        footer p {
+        footer  p {
             color: white;
         }
+        .background{
+            background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+            width: 100%;
+            height:20px;
+        }
     </style>
-    <header>
-        <p>Логін</p>
+    <header class="header">
+        <ul>
+            <li>Головна сторінка</li>
+            <li>Реєстрація</li>
+            <li>Логін</li>
+            <li>Список курсів</li>
+            <li>Стоворити курс</li>
+        </ul>
     </header>
-    <form method="post" action="auth/login">
-        <div class="outline">
-            <p>Нік: &#160; <input name="nick" id="nick"></p>
-            <p>Пароль: <input name="password" id="password" type="password"></p>
-            <p>
+    <div class="background">
 
-                <button name="btn_login" id="btn_login" value="Login"
-                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Логін</b></button>
-        </div>
-    </form>
+    </div>
     <footer>
         <p>Створенно командою "Python Summer 2020"</p>
     </footer>
+
     <script>
 
 
-        $("#btn_login").click(function () {
-            if ($("#password").val() == "" || $("#nick").val() == "") {
-                alert("Заповніть всі поля!");
-                $("form").attr("action", "");
-            }
 
-        });
-        var btnHeight = $("#btn_login").height();
-        $("#btn_login").mouseenter(function(){
+        var btnHeight = $(".header ul li").height();
+        $(".header ul li").mouseenter(function(){
             $(this).animate({
                 height: "50"
             });

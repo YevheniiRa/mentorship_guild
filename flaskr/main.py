@@ -7,8 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
 
-bp = Blueprint('main', __name__, url_prefix='/main')
-@bp.route('/course', methods=('GET', 'POST'))
+bp = Blueprint('main', __name__, url_prefix='/')
+@bp.route('/course/create', methods=('GET', 'POST'))
 def courses_create():
     if request.method == 'POST':
         username = request.form['nick']
@@ -38,12 +38,16 @@ def courses_create():
                 (course_date, course_name,user['id'],about_course )
             )
             db.commit()
-            return "Ви створили курс!"    
+            return "Ви створили курс!" 
+        flash(error)
+    if request.method == 'GET':
+        return render_template("course_create.html")
+
             
 
-        flash(error)
+        
 
-    return "Все ок"
+    
 @bp.route('/course/list')
 def course_list():
     db = get_db()

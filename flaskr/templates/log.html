@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Створіть курс </title>
+    <title>Вхід</title>
 </head>
+
 <body>
     <style>
-            form {
+        form {
             display: flex;
             justify-content: center;
         }
@@ -60,21 +62,21 @@
             height:20px;
         }
     </style>
-        <header>
-            <p>Створення курсу</p>
-        </header>
-        <div class="background">
+    <header>
+        <p>Логін</p>
+    </header>
+    <div class="background">
 
+    </div>
+    <form method="post" action="/login">
+        <div class="outline">
+            <p>Нік: &#160; <input name="nick" id="nick"></p>
+            <p>Пароль: <input name="password" id="password" type="password"></p>
+            <p>
+
+                <button name="btn_login" id="btn_login" value="Login"
+                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Логін</b></button>
         </div>
-    <form method="post" action="/course/create" >
-            <div class="outline">
-            <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
-            <p>Пароль: <input name="password" id="password" type="password"></p><p>
-            <p>Назва курсу	&#160; <input id= "name"name="name" value=""></p>
-            <p>Про курс <input name="about_course" id="about_course" type="text" style="width:250px;height:150px"></p><p>
-            <p>Коли відбудеться курс <input name="course_date" id="course_date" type="date"></p><p>
-            <button name = "btn_create_course" id="btn_create_course" value="Create" style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Створити курс</b></button>
-           </div>
     </form>
     <div class="background">
 
@@ -85,13 +87,25 @@
     <script>
 
 
-        $("#btn_create_course").click(function(){
-            if($("#name").val()=="" ||$("#password").val()==""||$("#name").val()==""||$("#about_course").val()==""||$("#course_date").val()==""){
-            alert("Заповніть всі поля!");
-            $("form").attr("action","");
+        $("#btn_login").click(function () {
+            if ($("#password").val() == "" || $("#nick").val() == "") {
+                alert("Заповніть всі поля!");
+                $("form").attr("action", "");
             }
+
+        });
+        var btnHeight = $("#btn_login").height();
+        $("#btn_login").mouseenter(function(){
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function(){
+            $(this).animate({
+                height: btnHeight
+            });
         });
 
     </script>
 </body>
+
 </html>

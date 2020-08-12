@@ -57,17 +57,23 @@
         footer p {
             color: white;
         }
+        .background{
+            background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+            width: 100%;
+            height:20px;
+        }
     </style>
     <header>
         <p>Реєстрація</p>
     </header>
-    <form method="post" action="auth/register">
+    <div class="background">
+
+    </div>
+    <form method="post" action="/register">
         <div class="outline">
             <p>Ім'я: &#160; <input id="first_name" name="first_name" value=""></p>
             <p>Пароль: <input name="password" id="password" type="password"></p>
-            <p>
             <p>Електрона адреса: <input name="email" id="email" type="email"></p>
-            <p>
             <p>Номер телефону: &#160; <input name="phone" id="telephone" type="tel"></p>
             <p>Нік: &#160; <input name="nick" id="nick"></p>
             <p>Рік народження: &#160; <input name="age" type="date" id="age"></p>
@@ -76,6 +82,9 @@
                 style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Зареєструватися</b></button>
         </div>
     </form>
+    <div class="background">
+
+    </div>
     <footer>
         <p>Створенно командою "Python Summer 2020"</p>
     </footer>
