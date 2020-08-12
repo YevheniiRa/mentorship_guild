@@ -35,7 +35,7 @@ def register():
                 (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
             )
             db.commit()
-            return render_template('log.html')
+            return  redirect(url_for('auth.login'))
 
         flash(error)
     if request.method == 'GET':

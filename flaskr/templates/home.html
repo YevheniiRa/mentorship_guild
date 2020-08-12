@@ -52,6 +52,10 @@
         footer  p {
             color: white;
         }
+        a{
+            text-decoration: none;
+            color: white;
+        }
         .background{
             background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
             width: 100%;
@@ -60,11 +64,10 @@
     </style>
     <header class="header">
         <ul>
-            <li>Головна сторінка</li>
-            <li>Реєстрація</li>
-            <li>Логін</li>
-            <li>Список курсів</li>
-            <li>Стоворити курс</li>
+            <li><a  href="{{url_for('auth.register')}}" >Реєстрація</a></li>
+            <li><a href="{{url_for('auth.login')}}">Логін</a></li>
+            <li> <a href="{{url_for('main.course_list')}}">Список курсів</a></li>
+            <li><a href="{{url_for('main.course_create')}}">Створити  курс</a></li>
         </ul>
     </header>
     <div class="background">

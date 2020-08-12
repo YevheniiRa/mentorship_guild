@@ -9,7 +9,7 @@ from flaskr.db import get_db
 
 bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/course/create', methods=('GET', 'POST'))
-def courses_create():
+def course_create():
     if request.method == 'POST':
         username = request.form['nick']
         password = request.form['password']
