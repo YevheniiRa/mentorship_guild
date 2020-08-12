@@ -34,10 +34,7 @@
             background-image: linear-gradient(to right, #434343 0%, black 100%);
         }
 
-        header p {
-            font-size: 40px;
-            color: white;
-        }
+   
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -57,14 +54,33 @@
         footer p {
             color: white;
         }
-        .background{
+
+        .background {
             background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
             width: 100%;
-            height:20px;
+            height: 20px;
+        }
+        header ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+        header ul li a{
+            text-decoration: none;
+            color: white;
+        }
+        header ul li {
+            font-size: 30px;
+            color: white;
+            display: flex;
+            padding-left: 25px;
         }
     </style>
     <header>
-        <p>Реєстрація</p>
+        <ul>
+            <li>Реєстрація </li>
+            <li><a href="{{url_for('home')}}">Головна сторінка</a></li>
+        </ul>
     </header>
     <div class="background">
 
@@ -75,6 +91,9 @@
             <p>Пароль: <input name="password" id="password" type="password"></p>
             <p>Електрона адреса: <input name="email" id="email" type="email"></p>
             <p>Номер телефону: &#160; <input name="phone" id="telephone" type="tel"></p>
+            <p>Ви ментор: &#160; <input name="mentor" id="mentor" value="True" type="radio"><label
+                    for="mentor">Так&#160;&#160;</label><input name="mentor" id="mentor" value="False" type="radio"><label
+                    for="mentor">Ні</label></p>
             <p>Нік: &#160; <input name="nick" id="nick"></p>
             <p>Рік народження: &#160; <input name="age" type="date" id="age"></p>
             <p>Професійні навички: &#160; <input name="skills" id="skills"></p>
@@ -92,7 +111,7 @@
 
 
         $("#btn_register").click(function () {
-            if ($("#first_name").val() == "" || $("#last_name").val() == "" || $("#password").val() == "" || $("#email").val() == "" || $("#telephone").val() == "" || $("#nick").val() == "" || $("#age").val() == "" || $("#skills").val() == "") {
+            if ($("#first_name").val() == "" || $("#last_name").val() == "" || $("#password").val() == "" || $("#email").val() == "" || $("#telephone").val() == "" || $("#nick").val() == "" || $("#age").val() == "" || $("#skills").val() == "" || $("#mentor").val() == "") {
                 alert("Заповніть всі поля!");
                 $("form").attr("action", "");
             }
@@ -101,13 +120,23 @@
             }
         });
         var btnHeight = $("#btn_register").height();
-        $("#btn_register").mouseenter(function(){
+        $("#btn_register").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight
+            });
+        });
+        var btnHeight1 = $("header ul li").height();
+        $("header ul li").mouseenter(function(){
             $(this).animate({
                 height: "50"
             });
         }).mouseleave(function(){
             $(this).animate({
-                height: btnHeight
+                height: btnHeight1
             });
         });
 

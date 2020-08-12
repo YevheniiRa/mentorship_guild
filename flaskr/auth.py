@@ -19,6 +19,7 @@ def register():
         prof_skills = request.form['skills']
         birthday = request.form['age']
         telephone_number=request.form['phone']
+        isMentor=request.form['mentor']
         db = get_db()
 
         
@@ -31,8 +32,8 @@ def register():
         
         if error is None:
             db.execute(
-                'INSERT INTO user_tab (username, password,name,email,telephone_number,   prof_skills   ,birthday) VALUES (?, ?,?,?,?,?,?)',
-                (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday)
+                'INSERT INTO user_tab (username, password,name,email,telephone_number,   prof_skills   ,birthday,isMentor) VALUES (?, ?,?,?,?,?,?,?)',
+                (username, generate_password_hash(password),name,email,telephone_number,prof_skills,birthday,isMentor)
             )
             db.commit()
             return  redirect(url_for('auth.login'))

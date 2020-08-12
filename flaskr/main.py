@@ -13,9 +13,17 @@ def course_create():
     if request.method == 'POST':
         username = request.form['nick']
         password = request.form['password']
-        course_date = request.form['course_date']
-        about_course = request.form['about_course']
-        course_name= request.form['name']
+        course_start = request.form['course_start']
+        about_course = request.form['course_description']
+        course_name= request.form['course_name']
+        volunteers=request.form['volunteers']
+        min_age=request.form['min_age']
+        max_age=request.form['max_age']
+        end_date=request.form['course_end']
+        min_people=request.form['min_people']
+        max_people=request.form['max_people']
+        schedule=request.form['schedule']
+        min_knowledge=request.form['min_knowledge']
         db = get_db() 
         error = None
         user = db.execute(
@@ -34,11 +42,11 @@ def course_create():
             session.clear()
             session['user_id'] = user['id']
             db.execute(
-                'INSERT INTO course (start_date, name,author_id,descr   ) VALUES (?,?,?,?)',
-                (course_date, course_name,user['id'],about_course )
+                'INSERT INTO course (author_id,name,start_date,descr,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                (user['id'],course_name,course_start,about_course,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge )
             )
             db.commit()
-            return "Ви створили курс!" 
+            return  redirect(url_for('main.course_list'))
         flash(error)
     if request.method == 'GET':
         return render_template("course_create.html")
@@ -52,7 +60,7 @@ def course_create():
 def course_list():
     db = get_db()
     courses = db.execute(
-        'SELECT name, start_date, descr, students_id, author_id'
+        'SELECT name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
         ' FROM course '
         
     ).fetchall()

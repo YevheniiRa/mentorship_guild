@@ -62,7 +62,7 @@
             height:20px;
         }
     </style>
-    <header class="header">
+    <header >
         <ul>
             <li><a  href="{{url_for('auth.register')}}" >Реєстрація</a></li>
             <li><a href="{{url_for('auth.login')}}">Логін</a></li>
@@ -81,8 +81,8 @@
 
 
 
-        var btnHeight = $(".header ul li").height();
-        $(".header ul li").mouseenter(function(){
+        var btnHeight = $("header ul li").height();
+        $("header ul li").mouseenter(function(){
             $(this).animate({
                 height: "50"
             });

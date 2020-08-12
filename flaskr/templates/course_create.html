@@ -11,6 +11,7 @@
             form {
             display: flex;
             justify-content: center;
+            padding-bottom: 30px;
         }
 
         form p {
@@ -30,10 +31,12 @@
             height: 100%;
             background-image: linear-gradient(to right, #434343 0%, black 100%);
         }
-
-        header p {
-            font-size: 40px;
+        
+        header ul li {
+            font-size: 30px;
             color: white;
+            display: flex;
+            padding-left: 25px;
         }
 
         body {
@@ -59,21 +62,42 @@
             width: 100%;
             height:20px;
         }
+        header ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+        header ul li a{
+            text-decoration: none;
+            color: white;
+        }
+  
     </style>
-        <header>
-            <p>Створення курсу</p>
+        <header >
+            <ul>
+                <li>Створення курсу</li>
+                <li><a href="{{url_for('home')}}">Головна сторінка</a></li>
+            </ul>
         </header>
         <div class="background">
 
         </div>
     <form method="post" action="/course/create" >
             <div class="outline">
-            <p>Нік: 	&#160; <input name="nick" id="nick" ></p>
-            <p>Пароль: <input name="password" id="password" type="password"></p><p>
-            <p>Назва курсу	&#160; <input id= "name"name="name" value=""></p>
-            <p>Про курс <input name="about_course" id="about_course" type="text" style="width:250px;height:150px"></p><p>
-            <p>Коли відбудеться курс <input name="course_date" id="course_date" type="date"></p><p>
-            <button name = "btn_create_course" id="btn_create_course" value="Create" style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Створити курс</b></button>
+                <p>Нік: <input id= "nick"name="nick" value=""></p>
+                <p>Пароль: <input id= "password"name="password" value="" type="password"></p>
+                <p>Назва курсу:	&#160; <input id= "course_name"name="course_name" value=""></p>
+                <p>Опис курсу: <input name="course_description" id="course_description" type="text" style="width:250px;height:150px"></p>
+                <p>Волонтери: <input id= "volunteers"name="volunteers" value=""></p>
+                <p>Min вік: <input id= "min_age"name="min_age" value=""></p>
+                <p>Max вік: <input id= "max_age"name="max_age" value=""></p>
+                <p>Min знання: <input id= "min_knowledge" name="min_knowledge" value=""></p>
+                <p>Початок курсу: <input name="course_start" id="course_start" type="date"></p>
+                <p>Кінець курсу: <input name="course_end" id="course_end" type="date"></p><p>
+                <p>Min кількість учнів: <input id= "min_people" name="min_people" value=""></p>
+                <p>Max кількість учнів: <input id= "max_peopl" name="max_people" value=""></p>
+                <p>Графік занять: <input id= "schedule" name="schedule" value=""></p>
+                <button name = "btn_create_course" id="btn_create_course" value="Create" style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Створити курс</b></button>
            </div>
     </form>
     <div class="background">
@@ -90,6 +114,30 @@
             alert("Заповніть всі поля!");
             $("form").attr("action","");
             }
+            else{
+                alert("Ви створили курс!")
+            }
+        });
+        var btnHeight = $("#btn_create_course").height();
+        $("#btn_create_course").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight
+            });
+        });
+        
+        var btnHeight1 = $("header ul li").height();
+        $("header ul li").mouseenter(function(){
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function(){
+            $(this).animate({
+                height: btnHeight1
+            });
         });
 
     </script>

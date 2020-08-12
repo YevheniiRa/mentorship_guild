@@ -81,9 +81,27 @@
             width: 100%;
             height:20px;
         }
+        header ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+        header ul li a{
+            text-decoration: none;
+            color: white;
+        }
+        header ul li {
+            font-size: 30px;
+            color: white;
+            display: flex;
+            padding-left: 25px;
+        }
     </style>
-    <header>
-        <p>Список курсів</p>
+      <header >
+        <ul>
+            <li>Список курсів</li>
+            <li><a href="{{url_for('home')}}">Головна сторінка</a></li>
+        </ul>
     </header>
     <div class="background">
 
@@ -93,9 +111,15 @@
     <div class="courses">
         <ul>
             <li>Назва курсу: {{courses['name']}}</li>
-            <li>Опис курсу: {{courses['descr']}}</li>
-
+            <li>Волонтери: {{courses['descr']}}</li>
+            <li>Мінімальний вік: {{courses['min_age']}}</li>
+            <li>Максимальний вік: {{courses['max_age']}}</li>
+            <li>Мінімальні знання : {{courses['min_knowledge']}}</li>
             <li>Початок курсу: {{courses['start_date']}}</li>
+            <li>Кінець курсу: {{courses['end_date']}}</li>
+            <li>Мінімальна  кількість учасників: {{courses['min_people']}}</li>
+            <li>Максимальна  кількість учасників: {{courses['max_people']}}</li>
+            <li>Графік занять: {{courses['schedule']}}</li>
             {% for mentor in mentor  %}
             {% if mentor['id']==courses['author_id'] %}
             <li>Ментор: {{mentor['username']}}</li>
@@ -129,6 +153,16 @@
         }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight
+            });
+        });
+        var btnHeight1 = $("header ul li").height();
+        $("header ul li").mouseenter(function(){
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function(){
+            $(this).animate({
+                height: btnHeight1
             });
         });
 
