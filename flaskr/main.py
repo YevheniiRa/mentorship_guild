@@ -59,7 +59,7 @@ def course_list():
 
     return render_template('course_list.html',courses=courses,mentor=mentor,student=student)  
     
-@bp.route('course/<int:course_id>/list', methods=('POST', ))
+@bp.route('course/<int:course_id>/list', methods=("POST",))
 @auth.login_required
 def course_delete(course_id):
     if request.method == 'POST':
@@ -71,12 +71,12 @@ def course_delete(course_id):
 
 
     
-@bp.route('/course/<int:course_id>/list/connect/<int:student_id>', methods=('POST',)) 
+@bp.route('/course/<int:course_id>/list/connect/<int:student_id>', methods=("GET",)) 
 @auth.login_required
 def course_connect(course_id,student_id): 
-    if request.method == 'POST':
+    if request.method == 'GET':
         db = get_db()
-        db.execute('INSERT INTO course (students_id) WHERE id = ?' ' VALUES (?)',(student_id))
+        db.execute("UPDATE course SET students_id=? WHERE id=?", (student_id,course_id,))
         db.commit()
         return redirect(url_for('main.course_list'))
    
