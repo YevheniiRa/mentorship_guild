@@ -1,12 +1,10 @@
 import functools
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from flaskr.db import get_db
-
+from . import auth
 bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/course/create', methods=('GET', 'POST'))
 def course_create():
@@ -52,7 +50,7 @@ def course_create():
 def course_list():
     db = get_db()
     courses = db.execute(
-        'SELECT name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
+        'SELECT id,name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
         ' FROM course '
         
     ).fetchall()
@@ -60,9 +58,19 @@ def course_list():
     student = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
 
     return render_template('course_list.html',courses=courses,mentor=mentor,student=student)  
-
     
-   
+@bp.route('course/<int:id>/list', methods=('GET', 'POST'))
+@auth.login_required
+def delete(id):
+    if request.method == 'POST':
+        db = get_db()
+        db.execute('DELETE FROM course WHERE id = ?', (id,))
+        db.commit()
+        return redirect(url_for('home'))
+    
+# @bp.route('/course/list/connect', methods=('GET', 'POST')) 
+# def course_connect(): 
+
         
     
 
@@ -70,35 +78,35 @@ def course_list():
 
 # @bp.route('/', methods=('GET'))
 # def main():
-#     # SuperCreator2007
+ 
 
 #     pass
 
 # @bp.route('/profile/<id>', methods=('GET'))
 # def profile(id):
-#     # Zircle XeroxPy
+ 
 
 #     pass
 
 # @bp.route('/courses/<id>', methods=('GET'))
 # def cource_description(id):
-#     # hochi...
+    
 #     pass
 
 # @bp.route('/orders/', methods=('GET', 'POST'))
 # def orders():
-#     # 
+    
 
 #     pass
 
 # @bp.route('/orders/<id>', methods=('GET'))
 # def orders(id):
-#     # 
+    
 
 #     pass
 
 # @bp.route('/orders/<id>', methods=('GET'))
 # def orders(id):
-#     # 
+     
 
 #     pass

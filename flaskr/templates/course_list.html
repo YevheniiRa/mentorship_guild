@@ -72,6 +72,16 @@
             color: white;
         }
 
+        .delete_the_course {
+            padding-top: 30px;
+        }
+
+        .delete_the_course button {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+        }
+
+
         .courses ul {
             border-left: 3px solid black;
 
@@ -161,11 +171,19 @@
             {% endif %}
             {% endfor %}
             {% if g.user %}
-            {% if g.user['isMentor']=="False" %}
+            {% if g.user['isMentor']=='False' %}
             <form action="" class="connect_to_the_course">
                 <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;">Приєднатися до
                     курсу</button>
             </form>
+            {% endif %}
+            {% if g.user['isMentor']=='True' %}
+            {% if g.user['id']==courses['author_id'] %}
+            <form action="{{ url_for('main.delete', id=courses['id']) }}"  method="post" class="delete_the_course">
+                <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;">Видалити курс
+                    </button>
+            </form>
+            {% endif %}
             {% endif %}
             {% endif %}
         </ul>
@@ -196,6 +214,16 @@
         }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight1
+            });
+        });
+        var btnHeight2 = $(".delete_the_course").height();
+        $(".delete_the_course").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight2
             });
         });
 

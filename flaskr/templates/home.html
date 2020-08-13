@@ -94,10 +94,19 @@
     <!-- Preload  -->
     <header>
         <ul>
+            {% if g.user==None %}
             <li><a href="{{url_for('auth.register')}}">Реєстрація</a></li>
             <li><a href="{{url_for('auth.login')}}">Логін</a></li>
             <li> <a href="{{url_for('main.course_list')}}">Список курсів</a></li>
+            {% endif %}
+            {% if g.user %}
+            <li> <a href="{{url_for('main.course_list')}}">Список курсів</a></li>
+            {% if g.user['isMentor']=='True' %}
             <li><a href="{{url_for('main.course_create')}}">Створити курс</a></li>
+            {% endif %}
+            <li><a href="{{url_for('auth.logout')}}">Вийти з аккаунта</a></li>
+            <li><a href="">Ваш  профіль</a></li>
+            {% endif %}
         </ul>
     </header>
     <div class="background">
