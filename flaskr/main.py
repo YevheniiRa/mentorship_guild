@@ -59,54 +59,29 @@ def course_list():
 
     return render_template('course_list.html',courses=courses,mentor=mentor,student=student)  
     
-@bp.route('course/<int:id>/list', methods=('GET', 'POST'))
+@bp.route('course/<int:course_id>/list', methods=('POST', ))
 @auth.login_required
-def delete(id):
+def course_delete(course_id):
     if request.method == 'POST':
         db = get_db()
-        db.execute('DELETE FROM course WHERE id = ?', (id,))
+        db.execute('DELETE FROM course WHERE id = ?', (course_id,))
         db.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('main.course_list'))
+
+
+
     
-# @bp.route('/course/list/connect', methods=('GET', 'POST')) 
-# def course_connect(): 
+@bp.route('/course/<int:course_id>/list/connect/<int:student_id>', methods=('POST',)) 
+@auth.login_required
+def course_connect(course_id,student_id): 
+    if request.method == 'POST':
+        db = get_db()
+        db.execute('INSERT INTO course (students_id) WHERE id = ?' ' VALUES (?)',(student_id))
+        db.commit()
+        return redirect(url_for('main.course_list'))
+   
+
 
         
     
 
-
-
-# @bp.route('/', methods=('GET'))
-# def main():
- 
-
-#     pass
-
-# @bp.route('/profile/<id>', methods=('GET'))
-# def profile(id):
- 
-
-#     pass
-
-# @bp.route('/courses/<id>', methods=('GET'))
-# def cource_description(id):
-    
-#     pass
-
-# @bp.route('/orders/', methods=('GET', 'POST'))
-# def orders():
-    
-
-#     pass
-
-# @bp.route('/orders/<id>', methods=('GET'))
-# def orders(id):
-    
-
-#     pass
-
-# @bp.route('/orders/<id>', methods=('GET'))
-# def orders(id):
-     
-
-#     pass
