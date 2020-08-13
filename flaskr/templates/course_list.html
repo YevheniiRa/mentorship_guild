@@ -130,11 +130,14 @@
             <li>Студенти: {{student['username']}}</li>
             {% endif %}
             {% endfor %}
-
+            {% if g.user %}
+            {% if g.user['isMentor']=="False" %}
             <form action="" class="connect_to_the_course">
                 <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;">Приєднатися до
                     курсу</button>
             </form>
+            {% endif %}
+            {% endif %}
         </ul>
     </div>
     {% endfor %}
