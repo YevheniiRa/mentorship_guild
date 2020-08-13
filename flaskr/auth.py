@@ -77,9 +77,8 @@ def login():
             return "Неправильний пароль або нік. "
 
         if error is None:
-            session.clear()
             session['user_id'] = user['id']
-            return "Все ок"
+            return  redirect(url_for('main.course_create'))
 
         flash(error)
     if request.method == 'GET':

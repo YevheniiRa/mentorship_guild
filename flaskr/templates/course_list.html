@@ -20,7 +20,7 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            overflow:scroll;
+            overflow: scroll;
 
         }
 
@@ -71,25 +71,30 @@
             background-image: linear-gradient(to right, #434343 0%, black 100%);
             color: white;
         }
-        .courses ul{
+
+        .courses ul {
             border-left: 3px solid black;
-            
-            
+
+
         }
-        .background{
+
+        .background {
             background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
             width: 100%;
-            height:20px;
+            height: 20px;
         }
+
         header ul {
             list-style: none;
             display: flex;
             flex-direction: row;
         }
-        header ul li a{
+
+        header ul li a {
             text-decoration: none;
             color: white;
         }
+
         header ul li {
             font-size: 30px;
             color: white;
@@ -98,11 +103,31 @@
         }
     </style>
     <!-- Preload  -->
-<style type="text/css">#preloader>p{display:none;}#preloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #000000 url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;background-size:41px;}</style>
-<div id="preloader"><div id="preloader_preload"></div></div>
-<script type="text/javascript">var preloader = document.getElementById("preloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);preloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(preloader);},1000);};</script>
-<!-- Preload  -->
-      <header >
+    <style type="text/css">
+        #preloader>p {
+            display: none;
+        }
+
+        #preloader_preload {
+            display: block;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-width: 1000px;
+            background: #000000 url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;
+            background-size: 41px;
+        }
+    </style>
+    <div id="preloader">
+        <div id="preloader_preload"></div>
+    </div>
+    <script
+        type="text/javascript">var preloader = document.getElementById("preloader_preload"); function fadeOutnojquery(el) { el.style.opacity = 1; var interhellopreloader = setInterval(function () { el.style.opacity = el.style.opacity - 0.05; if (el.style.opacity <= 0.05) { clearInterval(interhellopreloader); preloader.style.display = "none"; } }, 16); } window.onload = function () { setTimeout(function () { fadeOutnojquery(preloader); }, 1000); };</script>
+    <!-- Preload  -->
+    <header>
         <ul>
             <li>Список курсів</li>
             <li><a href="{{url_for('home')}}">Головна сторінка</a></li>
@@ -122,8 +147,8 @@
             <li>Мінімальні знання : {{courses['min_knowledge']}}</li>
             <li>Початок курсу: {{courses['start_date']}}</li>
             <li>Кінець курсу: {{courses['end_date']}}</li>
-            <li>Мінімальна  кількість учасників: {{courses['min_people']}}</li>
-            <li>Максимальна  кількість учасників: {{courses['max_people']}}</li>
+            <li>Мінімальна кількість учасників: {{courses['min_people']}}</li>
+            <li>Максимальна кількість учасників: {{courses['max_people']}}</li>
             <li>Графік занять: {{courses['schedule']}}</li>
             {% for mentor in mentor  %}
             {% if mentor['id']==courses['author_id'] %}
@@ -164,11 +189,11 @@
             });
         });
         var btnHeight1 = $("header ul li").height();
-        $("header ul li").mouseenter(function(){
+        $("header ul li").mouseenter(function () {
             $(this).animate({
                 height: "50"
             });
-        }).mouseleave(function(){
+        }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight1
             });

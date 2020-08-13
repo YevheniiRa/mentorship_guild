@@ -34,7 +34,7 @@
             background-image: linear-gradient(to right, #434343 0%, black 100%);
         }
 
-   
+
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -60,15 +60,18 @@
             width: 100%;
             height: 20px;
         }
+
         header ul {
             list-style: none;
             display: flex;
             flex-direction: row;
         }
-        header ul li a{
+
+        header ul li a {
             text-decoration: none;
             color: white;
         }
+
         header ul li {
             font-size: 30px;
             color: white;
@@ -77,10 +80,30 @@
         }
     </style>
     <!-- Preload  -->
-<style type="text/css">#preloader>p{display:none;}#preloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #000000 url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;background-size:41px;}</style>
-<div id="preloader"><div id="preloader_preload"></div></div>
-<script type="text/javascript">var preloader = document.getElementById("preloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);preloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(preloader);},1000);};</script>
-<!-- Preload  -->
+    <style type="text/css">
+        #preloader>p {
+            display: none;
+        }
+
+        #preloader_preload {
+            display: block;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-width: 1000px;
+            background: #000000 url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;
+            background-size: 41px;
+        }
+    </style>
+    <div id="preloader">
+        <div id="preloader_preload"></div>
+    </div>
+    <script
+        type="text/javascript">var preloader = document.getElementById("preloader_preload"); function fadeOutnojquery(el) { el.style.opacity = 1; var interhellopreloader = setInterval(function () { el.style.opacity = el.style.opacity - 0.05; if (el.style.opacity <= 0.05) { clearInterval(interhellopreloader); preloader.style.display = "none"; } }, 16); } window.onload = function () { setTimeout(function () { fadeOutnojquery(preloader); }, 1000); };</script>
+    <!-- Preload  -->
     <header>
         <ul>
             <li>Реєстрація </li>
@@ -97,8 +120,8 @@
             <p>Електрона адреса: <input name="email" id="email" type="email"></p>
             <p>Номер телефону: &#160; <input name="phone" id="telephone" type="tel"></p>
             <p>Ви ментор: &#160; <input name="mentor" id="mentor" value="True" type="radio"><label
-                    for="mentor">Так&#160;&#160;</label><input name="mentor" id="mentor" value="False" type="radio"><label
-                    for="mentor">Ні</label></p>
+                    for="mentor">Так&#160;&#160;</label><input name="mentor" id="mentor" value="False"
+                    type="radio"><label for="mentor">Ні</label></p>
             <p>Нік: &#160; <input name="nick" id="nick"></p>
             <p>Рік народження: &#160; <input name="age" type="date" id="age"></p>
             <p>Професійні навички: &#160; <input name="skills" id="skills"></p>
@@ -135,11 +158,11 @@
             });
         });
         var btnHeight1 = $("header ul li").height();
-        $("header ul li").mouseenter(function(){
+        $("header ul li").mouseenter(function () {
             $(this).animate({
                 height: "50"
             });
-        }).mouseleave(function(){
+        }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight1
             });

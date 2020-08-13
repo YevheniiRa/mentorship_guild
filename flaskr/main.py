@@ -11,8 +11,8 @@ bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/course/create', methods=('GET', 'POST'))
 def course_create():
     if request.method == 'POST':
-        username = request.form['nick']
-        password = request.form['password']
+        username = g.user['username']
+        password = g.user['password']
         course_start = request.form['course_start']
         about_course = request.form['course_description']
         course_name= request.form['course_name']
@@ -26,24 +26,16 @@ def course_create():
         min_knowledge=request.form['min_knowledge']
         db = get_db() 
         error = None
-        user = db.execute(
+        g.user = db.execute(
             'SELECT * FROM user_tab WHERE username = ?', (username,)
         ).fetchone()
         
-        if user is None:
-            error = 'Incorrect username.'
-            return "Неправильний пароль або нік. "
-            
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
-            return "Неправильний пароль або нік. "
-
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = g.user['id']
             db.execute(
                 'INSERT INTO course (author_id,name,start_date,descr,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                (user['id'],course_name,course_start,about_course,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge )
+                (g.user['id'],course_name,course_start,about_course,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge )
             )
             db.commit()
             return  redirect(url_for('main.course_list'))
