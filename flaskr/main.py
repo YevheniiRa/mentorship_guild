@@ -5,6 +5,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
 from . import auth
+import requests
 bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/course/create', methods=('GET', 'POST'))
 def course_create():
@@ -56,7 +57,7 @@ def course_list():
     ).fetchall()
     mentor = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
     student = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
-
+    send_simple_message()
     return render_template('course_list.html',courses=courses,mentor=mentor,student=student)  
     
 @bp.route('course/<int:course_id>/list', methods=("POST",))
@@ -118,6 +119,14 @@ def profile_change_data():
 
     if request.method == 'GET':
         return render_template("profile_change_data.html")
+def send_simple_message():
+	return requests.post(
+		"https://api.mailgun.net/v3/sandboxe45998f6366f4717b092f21ae2b1cc30.mailgun.org",
+		auth=("api", "a01ed38829e1288df0006b8d9d3ee04d-203ef6d0-3a5707f2"),
+		data={"from": "Excited User <mailgun@YOUR_DOMAIN_NAME>",
+			"to": ["vmatcenko@ukr.net", "YOU@YOUR_DOMAIN_NAME"],
+			"subject": "Hello",
+			"text": "Testing some Mailgun awesomness!"})        
 
 
 
