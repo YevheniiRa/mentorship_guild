@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Головна сторінка</title>
+    <title>Профіль</title>
 </head>
 
 <body>
@@ -85,6 +85,26 @@
             background: #000000 url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;
             background-size: 41px;
         }
+        .data{
+            display: flex;
+            justify-content: center;
+        }
+        .data ul{
+            list-style: none;
+
+        }
+        .data ul p{
+            font-size: 20px;
+        }
+        .data ul  li a{
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            border: 3px solid black;
+            background-color: black;
+            height:30px;
+  
+        }
     </style>
     <div id="preloader">
         <div id="preloader_preload"></div>
@@ -94,24 +114,53 @@
     <!-- Preload  -->
     <header>
         <ul>
-            {% if g.user==None %}
-            <li><a href="{{url_for('auth.register')}}">Реєстрація</a></li>
-            <li><a href="{{url_for('auth.login')}}">Логін</a></li>
-            <li> <a href="{{url_for('main.course_list')}}">Список курсів</a></li>
-            {% endif %}
-            {% if g.user %}
-            <li> <a href="{{url_for('main.course_list')}}">Список курсів</a></li>
-            {% if g.user['isMentor']=='True' %}
-            <li><a href="{{url_for('main.course_create')}}">Створити курс</a></li>
-            {% endif %}
-            <li><a href="{{url_for('auth.logout')}}">Вийти з аккаунта</a></li>
-            <li><a href="{{url_for('main.profile')}}">Ваш  профіль</a></li>
-            {% endif %}
+            <li><a href="{{url_for('home')}}">Головна сторінка</a></li>
+            <li><a href="">Профіль</a></li>
         </ul>
     </header>
     <div class="background">
 
     </div>
+
+    {% if g.user %}
+    <div class="data">
+        <ul>
+            <li>
+                <p>Ваш нік: {{g.user['username']}}</p>
+            </li>
+            <li>
+                <!-- <p>Ваш пароль: {{g.user['password']}} </p> -->
+            </li>
+            <li>
+                <p>Ваше ім'я: {{g.user['name']}}</p>
+            </li> 
+            <li>
+                <p>Ваш email: {{g.user['email']}}</p>
+            </li>
+            <li>
+                <p>Ваш телефонний номер: {{g.user['telephone_number']}}</p>
+            </li>
+            <li>
+                <p>Ваша дата народження: {{g.user['birthday']}}</p>
+            </li>
+            <li>
+                <p>Ваші професійні навички:{{g.user['prof_skills']}}</p>
+            </li>
+            <li>
+                {%if g.user['isMentor']=="True"%}
+                <p>Ви ментор: Так</p>
+                {%endif%}
+                {%if g.user['isMentor']=="False"%}
+                <p>Ви ментор: Ні</p>
+                {%endif%}
+            </li>
+            <li><a href="{{url_for('main.profile_change_data')}}">Змінити дані профілю</a></li>
+        </ul>
+    </div>
+    <div class="background">
+
+    </div>
+    {% endif %}
     <footer>
         <p>Створенно командою "Python Summer 2020"</p>
     </footer>
@@ -128,6 +177,16 @@
         }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight
+            });
+        });
+        var btnHeight1 = $(".data ul  li a").height();
+        $(".data ul li a").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight1
             });
         });
 

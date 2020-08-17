@@ -82,6 +82,45 @@ def course_connect(course_id,student_id):
    
 
 
+
+
+
+@bp.route('/profile')
+def profile():
+    return render_template("profile.html")
+
+
+
+
+@bp.route('/profile/change/data', methods=('GET', 'POST'))
+def profile_change_data():
+    if request.method == 'POST':
+        username = request.form["nick"]
+        name = request.form.get["name"]
+        email = request.form.get["email"]
+        prof_skills =request.form["skills"]
+        birthday = request.form["birthday"]
+        telephone_number=request.form["telephone_number"]
+        db = get_db()        
+        error = None
+        if db.execute(
+            'SELECT id FROM user_tab WHERE username = ?', (username,)
+        ).fetchone() is not None:
+            error = 'User {} is already registered.'.format(username)
+            return "Користувач з таким ніком вже зареєстрованний"
+        
+        if error is None:
+            db.execute("UPDATE user_tab SET username=?,name=?,email=?,telephone_number=?,birthday=?,prof_skills=? WHERE id=?", (username,name,email,prof_skills,birthday,telephone_number,g.user['id'],))
+            db.commit()
+            return  redirect(url_for('home'))
+
+        flash(error)
+
+    if request.method == 'GET':
+        return render_template("profile_change_data.html")
+
+
+
         
     
 
