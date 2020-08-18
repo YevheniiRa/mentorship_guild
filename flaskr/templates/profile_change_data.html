@@ -125,10 +125,11 @@
 
     {% if g.user %}
     <div class="data">
+        <form method="post" action="/profile/change/data" class="profile_changes">
         <ul>
             <li>
                 <p>Ваш нік: {{g.user['username']}}
-                <p>Змінити на: <input id="nick" name="nick" value="{{g.user['username']}}"></p>
+                <p>Змінити на: <input id="username" name="username" value="{{g.user['username']}}"></p>
             </li>
             <li>
                 <!-- <p>Ваш пароль: {{g.user['password']}} </p> -->
@@ -156,12 +157,13 @@
             </li>
 
             <li>
-                <form method="post" action="/profile/change/data" class="profile_changes">
+                
                     <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Зберегти
                             зміни</b></button>
-                </form>
+                
             </li>
         </ul>
+    </form>
     </div>
     <div class="background">
 
