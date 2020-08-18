@@ -60,7 +60,7 @@ def course_list():
     return render_template('course_list.html', courses=courses, mentor=mentor, student=student)
 
 
-@bp.route('course/<int:course_id>/list', methods=("POST",))
+@bp.route('course/<int:course_id>/delete', methods=("POST",))
 @auth.login_required
 def course_delete(course_id):
     if request.method == 'POST':
@@ -116,6 +116,34 @@ def profile_change_data():
 
     if request.method == 'GET':
         return render_template("profile_change_data.html")
+# @bp.route('/course/edit/<int:course_id>')
+# def course_edit(course_id):
+#     return render_template("course_edit.html")
+
+# @bp.route('/course/<int:course_id>/edit', methods=("GET",))
+# def course_id_edit(course_id):
+#     if request.method == 'GET':
+#         return redirect(url_for('main.course_edit',course_id=course_id))  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # def send_simple_message():
 # 	return requests.post(
 # 		"https://api.mailgun.net/v3/sandboxe45998f6366f4717b092f21ae2b1cc30.mailgun.org",

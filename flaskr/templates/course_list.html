@@ -48,6 +48,7 @@
 
         header {
             display: flex;
+
             justify-content: center;
             width: 100%;
             height: 100%;
@@ -67,19 +68,28 @@
             padding-top: 30px;
         }
 
-        .connect_to_the_course button {
+        .connect_to_the_course input {
             background-image: linear-gradient(to right, #434343 0%, black 100%);
             color: white;
         }
 
-        .delete_the_course {
-            padding-top: 30px;
-        }
-
+      
         .delete_the_course input {
             background-image: linear-gradient(to right, #434343 0%, black 100%);
             color: white;
         }
+
+
+
+        .edit_the_course {
+            padding-top: 30px;
+        }
+
+        .edit_the_course input {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+        }
+
 
 
         .courses ul {
@@ -160,6 +170,7 @@
             <li>Мінімальна кількість учасників: {{courses['min_people']}}</li>
             <li>Максимальна кількість учасників: {{courses['max_people']}}</li>
             <li>Графік занять: {{courses['schedule']}}</li>
+            <li>Волонтери : {{courses['volunteers']}}</li>
             {% for mentor in mentor  %}
             {% if mentor['id']==courses['author_id'] %}
             <li>Ментор: {{mentor['username']}}</li>
@@ -172,16 +183,27 @@
             {% endfor %}
             {% if g.user %}
             {% if g.user['isMentor']=='False' %}
-            <form action="{{ url_for('main.course_connect', course_id=courses['id'],student_id=g.user['id']) }}" class="connect_to_the_course">
-                <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;">Приєднатися до
-                    курсу</button>
+            <form action="{{ url_for('main.course_connect', course_id=courses['id'],student_id=g.user['id']) }}"
+                class="connect_to_the_course">
+                <input type="submit" value="Приєднаться до  курсу"
+                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+                    onclick="return confirm('Ви впевненні?');">
             </form>
             {% endif %}
             {% if g.user['isMentor']=='True' %}
             {% if g.user['id']==courses['author_id'] %}
-            <form action="{{ url_for('main.course_delete', course_id=courses['id']) }}"  method="post" class="delete_the_course">
-    
-                    <input class="delete_the_course" type="submit" value="Видалити курс" style=" font-family: 'Montserrat', sans-serif; font-size: 17px;" onclick="return confirm('Ви впевненні?');">
+            <form action="{{ url_for('main.course_delete', course_id=courses['id']) }}" method="post"
+                class="delete_the_course">
+
+                <input class="delete_the_course" type="submit" value="Видалити курс"
+                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+                    onclick="return confirm('Ви впевненні?');">
+            </form>
+            <form action="{{ url_for('main.course_id_edit',course_id=courses['id']) }}" method="get" class="edit_the_course">
+
+                <input type="submit" value="Змінити курс"
+                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+                    onclick="return confirm('Ви впевненні?');">
             </form>
             {% endif %}
             {% endif %}
@@ -196,8 +218,8 @@
         <p>Створенно командою "Python Summer 2020"</p>
     </footer>
     <script>
-        var btnHeight = $(".connect_to_the_course button").height();
-        $(".connect_to_the_course button").mouseenter(function () {
+        var btnHeight = $(".connect_to_the_course input").height();
+        $(".connect_to_the_course input").mouseenter(function () {
             $(this).animate({
                 height: "50"
             });
@@ -216,8 +238,8 @@
                 height: btnHeight1
             });
         });
-        var btnHeight2 = $(".delete_the_course").height();
-        $(".delete_the_course").mouseenter(function () {
+        var btnHeight2 = $(".delete_the_course input").height();
+        $(".delete_the_course input").mouseenter(function () {
             $(this).animate({
                 height: "80"
             });
@@ -226,6 +248,18 @@
                 height: btnHeight2
             });
         });
+
+        var btnHeight3 = $(".edit_the_course input").height();
+        $(".edit_the_course input").mouseenter(function () {
+            $(this).animate({
+                height: "80"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight3
+            });
+        });
+
 
 
     </script>
