@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -65,10 +65,15 @@
             width: 100%;
             height: 20px;
         }
-    </style> -->
+        .profile_changes button {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+            height: 30px;
+        }
+    </style> 
 
     <!-- Preload  -->
-    <!-- <style type="text/css">
+    <style type="text/css">
         #preloader>p {
             display: none;
         }
@@ -101,17 +106,13 @@
         }
 
 
-        .profile_changes button {
-            background-image: linear-gradient(to right, #434343 0%, black 100%);
-            color: white;
-            height: 30px;
-        }
+
     </style>
     <div id="preloader">
         <div id="preloader_preload"></div>
     </div>
     <script
-        type="text/javascript">var preloader = document.getElementById("preloader_preload"); function fadeOutnojquery(el) { el.style.opacity = 1; var interhellopreloader = setInterval(function () { el.style.opacity = el.style.opacity - 0.05; if (el.style.opacity <= 0.05) { clearInterval(interhellopreloader); preloader.style.display = "none"; } }, 16); } window.onload = function () { setTimeout(function () { fadeOutnojquery(preloader); }, 1000); };</script> -->
+        type="text/javascript">var preloader = document.getElementById("preloader_preload"); function fadeOutnojquery(el) { el.style.opacity = 1; var interhellopreloader = setInterval(function () { el.style.opacity = el.style.opacity - 0.05; if (el.style.opacity <= 0.05) { clearInterval(interhellopreloader); preloader.style.display = "none"; } }, 16); } window.onload = function () { setTimeout(function () { fadeOutnojquery(preloader); }, 1000); };</script>
     <!-- Preload  -->
     <header>
         <ul>
@@ -122,7 +123,7 @@
     <div class="background">
 
     </div>
-<!-- 
+
     {% if g.user %}
     <div class="data">
         <form method="post" action="/profile/change/data" class="profile_changes">
@@ -131,9 +132,9 @@
                 <p>Ваш нік: {{g.user['username']}}
                 <p>Змінити на: <input id="username" name="username" value="{{g.user['username']}}"></p>
             </li>
-            <li> -->
+            <li>
                 <!-- <p>Ваш пароль: {{g.user['password']}} </p> -->
-            <!-- </li>
+            </li>
             <li>
                 <p>Ваше ім'я: {{g.user['name']}} </p>
                 <p>Змінити на: <input id="name" type="text"name="name" value="{{g.user['name']}}"></p>
@@ -203,11 +204,11 @@
             });
         }).mouseleave(function () {
             $(this).animate({
-                height: btnHeight
+                height: btnHeight1
             });
         });
 
     </script>
 </body>
 
-</html> -->
+</html>

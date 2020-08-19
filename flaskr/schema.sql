@@ -9,7 +9,7 @@ CREATE TABLE user_tab (
   password TEXT NOT NULL,
   name TEXT  NOT NULL,
   email TEXT UNIQUE NOT NULL,
-  telephone_number TEXT UNIQUE NOT NULL ,
+  telephone_number TEXT  NOT NULL ,
   birthday TEXT NOT NULL,
   prof_skills TEXT NOT NULL,
   isMentor BOOLEAN NOT NULL

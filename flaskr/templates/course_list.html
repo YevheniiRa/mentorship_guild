@@ -73,8 +73,12 @@
             color: white;
         }
 
-      
+
         .delete_the_course input {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+        }
+        .leave_the_course input {
             background-image: linear-gradient(to right, #434343 0%, black 100%);
             color: white;
         }
@@ -160,6 +164,7 @@
     {% for courses in courses %}
     <div class="courses">
         <ul>
+            
             <li>Назва курсу: {{courses['name']}}</li>
             <li>Про курс: {{courses['descr']}}</li>
             <li>Мінімальний вік: {{courses['min_age']}}</li>
@@ -182,6 +187,17 @@
             {% endif %}
             {% endfor %}
             {% if g.user %}
+            {% if g.user['id']==courses['students_id'] %}
+
+            <form action="{{ url_for('main.course_leave', course_id=courses['id'],student_id=g.user['id']) }}" method="post"
+                class="leave_the_course">
+
+                <input  type="submit" value="Покинути курс"
+                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+                    onclick="return confirm('Ви впевненні?');">
+            </form>
+
+            {% endif %}
             {% if g.user['isMentor']=='False' %}
             <form action="{{ url_for('main.course_connect', course_id=courses['id'],student_id=g.user['id']) }}"
                 class="connect_to_the_course">
@@ -190,16 +206,18 @@
                     onclick="return confirm('Ви впевненні?');">
             </form>
             {% endif %}
+
             {% if g.user['isMentor']=='True' %}
             {% if g.user['id']==courses['author_id'] %}
             <form action="{{ url_for('main.course_delete', course_id=courses['id']) }}" method="post"
                 class="delete_the_course">
 
-                <input class="delete_the_course" type="submit" value="Видалити курс"
+                <input  type="submit" value="Видалити курс"
                     style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
                     onclick="return confirm('Ви впевненні?');">
             </form>
-            <form action="{{ url_for('main.course_id_edit',course_id=courses['id']) }}" method="get" class="edit_the_course">
+            <form action="{{ url_for('main.course_edit_',course_id=courses['id']) }}" method="get"
+                class="edit_the_course">
 
                 <input type="submit" value="Змінити курс"
                     style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
@@ -257,6 +275,17 @@
         }).mouseleave(function () {
             $(this).animate({
                 height: btnHeight3
+            });
+        });
+
+        var btnHeight4 = $(".leave_the_course input").height();
+        $(".leave_the_course input").mouseenter(function () {
+            $(this).animate({
+                height: "80"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight4
             });
         });
 

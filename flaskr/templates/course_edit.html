@@ -65,6 +65,12 @@
             width: 100%;
             height: 20px;
         }
+
+        .course_edit button {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            color: white;
+            height: 30px;
+        }
     </style>
 
     <!-- Preload  -->
@@ -99,13 +105,6 @@
         .data ul p {
             font-size: 20px;
         }
-
-
-        .profile_changes button {
-            background-image: linear-gradient(to right, #434343 0%, black 100%);
-            color: white;
-            height: 30px;
-        }
     </style>
     <div id="preloader">
         <div id="preloader_preload"></div>
@@ -122,70 +121,69 @@
     <div class="background">
 
     </div>
-
-   
-  
+    {% for courses in courses %}
+    {% if courses['id']==course_id%}
     <div class="data">
-        <form method="post" action="{{ url_for('main.course_edit' )}}" class="profile_changes">
+        <form method="post" action="/course/{{course_id}}/edit" class="course_edit">
             <ul>
                 <li>
-                    {% for course_id in course_id %}
-                    <p>Назва курсу: {{course_id}}
-                    <p>Змінити на: <input id="username" name="username" value="{{g.user['username']}}"></p>
-                    {% endfor %}
+                    <p>Назва курсу: {{courses['name']}}
+                    <p>Змінити на: <input id="course_name" name="course_name" value="{{courses['name']}}"></p>
+                 
                 </li>
                 <li>
-                    <p>Початок курсу: {{g.user['name']}} </p>
-                    <p>Змінити на: <input id="name" type="text"name="name" value="{{g.user['name']}}"></p>
+                    <p>Початок курсу: {{courses['start_date']}} </p>
+                    <p>Змінити на: <input id="course_start" type="date" name="course_start" value=" {{courses['start_date']}}"></p>
                 </li>
                 <li>
-                    <p>Кінець курсу:{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Кінець курсу: {{courses['end_date']}}</p>
+                    <p>Змінити на: <input id="course_end" type="date" name="course_end" value=" {{courses['end_date']}}"></p>
                 </li>
                 <li>
-                    <p>Опис курсу: {{g.user['email']}}</p>
-                    <p>Змінити на: <input id="email"   type="email"name="email" value="{{g.user['email']}}"></p>
+                    <p>Опис курсу: {{courses['descr']}} </p>
+                    <p>Змінити на: <input id="course_descr" type="text" name="course_descr" value="{{courses['descr']}}"></p>
                 </li>
                 <li>
-                    <p>Мінімальний вік студенту  : {{g.user['telephone_number']}}</p>
-                    <p>Змінити на: <input id="telephone_number" type="tel" name="telephone_number"
-                            value="{{g.user['telephone_number']}}"></p>
+                    <p>Мінімальний вік студенту :  {{courses['min_age']}}</p>
+                    <p>Змінити на: <input id="min_age" type="text" name="min_age" value="{{courses['min_age']}}"></p>
                 </li>
                 <li>
-                    <p>Максимальний вік студенту : {{g.user['birthday']}}</p>
-                    <p>Змінити на: <input id="birthday" name="birthday"  type="date" value="{{g.user['birthday']}}"></p>
+                    <p>Максимальний вік студенту :  {{courses['max_age']}} </p>
+                    <p>Змінити на: <input id="max_age" name="max_age" type="text" value="{{courses['max_age']}}"></p>
                 </li>
                 <li>
-                    <p>Розклад:{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Розклад: {{courses['schedule']}}</p>
+                    <p>Змінити на: <input id="schedule" name="schedule" type="text " value=" {{courses['schedule']}}"></p>
                 </li>
                 <li>
-                    <p>Мінімальні знання :{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Мінімальні знання : {{courses['min_knowledge']}}</p>
+                    <p>Змінити на: <input id="min_skills" name="min_skills" type="text " value="{{courses['min_knowledge']}}"></p>
                 </li>
                 <li>
-                    <p>Мінімальна  кількість студентів :{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Мінімальна кількість студентів : {{courses['min_people']}}</p>
+                    <p>Змінити на: <input id="min_students" name="min_students" type="text " value="{{courses['min_people']}}"></p>
                 </li>
                 <li>
-                    <p>Максимальна  кількість студентів :{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Максимальна кількість студентів : {{courses['max_people']}}</p>
+                    <p>Змінити на: <input id="max_students" name="max_students" type="text " value="{{courses['max_people']}}"></p>
                 </li>
                 <li>
-                    <p>Волонтери    :{{g.user['prof_skills']}}</p>
-                    <p>Змінити на: <input id="prof_skills" name="prof_skills" type="text "value="{{g.user['prof_skills']}}"></p>
+                    <p>Волонтери : {{courses['volunteers']}}</p>
+                    <p>Змінити на: <input id="volunteers" name="volunteers" type="text" value="{{courses['volunteers']}}"></p>
                 </li>
-    
+
                 <li>
-                    
-                        <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Зберегти
-                                зміни</b></button>
-                    
+
+                    <button style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"><b>Зберегти
+                            зміни</b></button>
+
                 </li>
             </ul>
-        
-    </form>
+
+        </form>
     </div>
+    {% endif %}
+    {% endfor %}
     <div class="background">
 
     </div>
@@ -197,14 +195,35 @@
 
     <script>
 
-        $(".profile_changes button").click(function () {
-            if ($("#name").val() == "" || $("#nick").val() == "" || $("#email").val() == "" || $("#telephone_number").val() == "" || $("#birthday").val() == "" || $("#prof_skills").val() == "" || $("#age").val() == "" || $("#skills").val() == "") {
+        $(".course_edit button").click(function () {
+            if ($("#course_name").val() == "" || $("#course_start").val() == "" || $("#course_end").val() == "" || $("#course_descr").val() == "" || $("#min_age").val() == "" || $("#max_age").val() == "" || $("#schedule").val() == "" || $("#min_skills").val() == "" || $("#min_students").val() == "" || $("#max_students").val() == "" || $("#volunteers").val() == "") {
                 alert("Заповніть всі поля!");
                 $("form").attr("action", "");
             }
             else {
-                    alert("Ви зберегли зміни!");
+                alert("Ви зберегли зміни!");
             }
+        });
+        var btnHeight = $("header ul li").height();
+        $("header ul li").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight
+            });
+        });
+
+        var btnHeight1 = $(".course_edit button").height();
+        $(".course_edit button").mouseenter(function () {
+            $(this).animate({
+                height: "50"
+            });
+        }).mouseleave(function () {
+            $(this).animate({
+                height: btnHeight1
+            });
         });
 
 

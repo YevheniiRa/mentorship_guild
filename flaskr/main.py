@@ -86,6 +86,20 @@ def profile():
     return render_template("profile.html")
 
 
+@bp.route('course/edit/<int:course_id>', methods=("GET",))
+def course_edit_(course_id):
+    if request.method == 'GET':
+        db = get_db()
+        courses = db.execute(
+        'SELECT id,name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
+        ' FROM course '
+
+        ).fetchall()
+        return render_template("course_edit.html",course_id=course_id,courses=courses)
+
+
+
+
 @bp.route('/profile/change/data', methods=('GET', 'POST'))
 def profile_change_data():
     if request.method == 'POST':
@@ -115,7 +129,49 @@ def profile_change_data():
         flash(error)
 
     if request.method == 'GET':
+
         return render_template("profile_change_data.html")
+
+
+@bp.route('/course/<int:course_id>/edit',methods=("POST",))
+def course_edit(course_id):
+    if request.method == 'POST':
+        course_start = request.form['course_start']
+        about_course = request.form['course_descr']
+        course_name = request.form['course_name']
+        volunteers = request.form['volunteers']
+        min_age = request.form['min_age']
+        max_age = request.form['max_age']
+        end_date = request.form['course_end']
+        min_people = request.form['min_students']
+        max_people = request.form['max_students']
+        schedule = request.form['schedule']
+        min_knowledge = request.form['min_skills']
+        db = get_db()
+        error = None
+        if error is None:
+            session.clear()
+            session['user_id'] = g.user['id']
+            db.execute("UPDATE course SET name=?,start_date=?,descr=?,volunteers=?,min_age=?,max_age=?,end_date=?,min_people=?,max_people=?,schedule=?,min_knowledge=? WHERE id=?",
+                      (course_name,course_start , about_course,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge,course_id))
+            db.commit()
+            return redirect(url_for('main.course_list'))
+        flash(error)
+
+
+
+
+# @bp.route('/course/<int:course_id>/list/leave/<int:student_id>', methods=("GET",))
+# @auth.login_required
+# def course_leave(course_id,student_id):
+#     if request.method == 'GET':
+#         db = get_db()
+#         db.execute("UPDATE course SET students_id=? WHERE id=?",
+#                    (student_id, course_id,))
+#         db.commit()
+#         return redirect(url_for('main.course_list'))
+
+
 # @bp.route('/course/edit/<int:course_id>')
 # def course_edit(course_id):
 #     return render_template("course_edit.html")
@@ -131,8 +187,8 @@ def profile_change_data():
 
 
 
-
-
+def send_mail():
+    pass
 
 
 

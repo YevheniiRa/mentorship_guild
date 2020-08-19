@@ -21,15 +21,18 @@ def register():
         telephone_number=request.form['phone']
         isMentor=request.form['mentor']
         db = get_db()
-
-        
         error = None
         if db.execute(
             'SELECT id FROM user_tab WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
             return "Користувач з таким ніком вже зареєстрованний"
-        
+        if db.execute(
+    'SELECT id FROM user_tab WHERE email = ?', (email,)
+        ).fetchone() is not None:
+
+            return "Користувач з такою поштую вже зареєстрованний"    
+
         if error is None:
             db.execute(
                 'INSERT INTO user_tab (username, password,name,email,telephone_number,   prof_skills   ,birthday,isMentor) VALUES (?, ?,?,?,?,?,?,?)',
