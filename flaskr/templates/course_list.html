@@ -162,6 +162,7 @@
     </div>
 
     {% for courses in courses %}
+    
     <div class="courses">
         <ul>
             
@@ -187,25 +188,35 @@
             {% endif %}
             {% endfor %}
             {% if g.user %}
-            {% if g.user['id']==courses['students_id'] %}
-
-            <form action="{{ url_for('main.course_leave', course_id=courses['id'],student_id=g.user['id']) }}" method="post"
-                class="leave_the_course">
-
-                <input  type="submit" value="Покинути курс"
-                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
-                    onclick="return confirm('Ви впевненні?');">
-            </form>
-
-            {% endif %}
             {% if g.user['isMentor']=='False' %}
-            <form action="{{ url_for('main.course_connect', course_id=courses['id'],student_id=g.user['id']) }}"
-                class="connect_to_the_course">
-                <input type="submit" value="Приєднаться до  курсу"
-                    style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
-                    onclick="return confirm('Ви впевненні?');">
-            </form>
+           {% for student_in_course in student_in_course %}
+           {% if g.user['id']==student_in_course['student_id']  and  courses['id']==student_in_course['course_id'] %}
+         
+            
+            <form action="" method="post"
+            class="leave_the_course">
+
+            <input  type="submit" value="Покинути курс"
+                style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+                onclick="return confirm('Ви впевненні?');">
+        </form>
+
+        {%endif%}
+        {% if g.user['id'] != student_in_course['student_id'] and courses['id'] != student_in_course['course_id']%}
+       
+        <form action="{{ url_for('main.course_connect', course_id=courses['id'],student_id=g.user['id']) }}"
+        class="connect_to_the_course">
+        <input type="submit" value="Приєднаться до  курсу"
+            style="width:365px;height:30px; font-family: 'Montserrat', sans-serif;"
+            onclick="return confirm('Ви впевненні?');">
+    </form> 
+    
+    {%endif%}
+        {%endfor%}
+        {% endif %}
             {% endif %}
+            
+    
 
             {% if g.user['isMentor']=='True' %}
             {% if g.user['id']==courses['author_id'] %}
@@ -225,9 +236,10 @@
             </form>
             {% endif %}
             {% endif %}
-            {% endif %}
+         
         </ul>
     </div>
+ 
     {% endfor %}
     <div class="background">
 

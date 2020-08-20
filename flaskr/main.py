@@ -50,14 +50,15 @@ def course_create():
 def course_list():
     db = get_db()
     courses = db.execute(
-        'SELECT id,name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
+        'SELECT id,name, start_date, descr,  author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
         ' FROM course '
 
     ).fetchall()
     mentor = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
     student = db.execute('SELECT username,id ' 'FROM user_tab').fetchall()
+    student_in_course = db.execute('SELECT course_id,student_id ' 'FROM  students_in_course').fetchall()
     # send_simple_message()
-    return render_template('course_list.html', courses=courses, mentor=mentor, student=student)
+    return render_template('course_list.html', courses=courses, mentor=mentor, student=student,student_in_course=student_in_course)
 
 
 @bp.route('course/<int:course_id>/delete', methods=("POST",))
@@ -75,8 +76,12 @@ def course_delete(course_id):
 def course_connect(course_id, student_id):
     if request.method == 'GET':
         db = get_db()
-        db.execute("UPDATE course SET students_id=? WHERE id=?",
-                   (student_id, course_id,))
+
+
+        db.execute(
+            'INSERT INTO students_in_course (course_id, student_id) VALUES (?, ?)',
+            (course_id, student_id)
+        )                   
         db.commit()
         return redirect(url_for('main.course_list'))
 
@@ -91,7 +96,7 @@ def course_edit_(course_id):
     if request.method == 'GET':
         db = get_db()
         courses = db.execute(
-        'SELECT id,name, start_date, descr, students_id, author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
+        'SELECT id,name, start_date, descr,  author_id,volunteers,min_age,max_age,end_date,min_people,max_people,schedule,min_knowledge'
         ' FROM course '
 
         ).fetchall()

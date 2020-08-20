@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS user_tab; 
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS course;
-
+DROP TABLE IF EXISTS students_in_course;
 CREATE TABLE user_tab (
   id  INTEGER  PRIMARY KEY,  
   username TEXT UNIQUE NOT NULL,
@@ -32,7 +32,6 @@ CREATE TABLE course (
     name TEXT NOT NULL, 
     start_date DATE NOT NULL,
     descr TEXT NOT NULL,
-    students_id TEXT ,
     volunteers  TEXT NOT NULL,
     min_age INTEGER NOT NULL,
     max_age INTEGER NOT NULL,
@@ -41,7 +40,10 @@ CREATE TABLE course (
     max_people INTEGER NOT NULL,
     schedule TEXT NOT NULL,
     min_knowledge TEXT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user_tab (id),
-    FOREIGN KEY (students_id) REFERENCES user_tab (id)
+    FOREIGN KEY (author_id) REFERENCES user_tab (id)
 );
 
+CREATE TABLE students_in_course(
+course_id INTEGER NOT NULL,
+student_id INTEGER NOT NULL
+);

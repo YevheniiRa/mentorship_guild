@@ -26,11 +26,10 @@ def register():
             'SELECT id FROM user_tab WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
-            return "Користувач з таким ніком вже зареєстрованний"
+            return render_template("reg.html")
         if db.execute(
     'SELECT id FROM user_tab WHERE email = ?', (email,)
         ).fetchone() is not None:
-
             return "Користувач з такою поштую вже зареєстрованний"    
 
         if error is None:
